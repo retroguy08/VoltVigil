@@ -9,7 +9,7 @@ from google import genai
 import streamlit as st
 
 # Securely load the API key with fallback
-api_key = st.secrets.get("GEMINI_API_KEY") or os.environ.get("GEMINI_API_KEY")
+client = genai.Client(api_key=st.secrets["GOOGLE_API_KEY"])
 
 if not api_key:
     st.error("Gemini API Key not found! Please check your Streamlit Cloud Secrets configuration.")
