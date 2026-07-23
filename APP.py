@@ -1,15 +1,21 @@
 import streamlit as st
 import requests
-import google.generativeai as genai
 import json
 
 # --- 1. CONFIGURATION ---
 st.set_page_config(page_title="VoltVigil | Energy Auditor", page_icon="⚡")
 
-# We will securely load the API key from Streamlit's secrets later. 
-# For local testing, you can temporarily paste your Gemini API key here.
-GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY", "YOUR_TEMP_GEMINI_KEY_HERE")
-genai.configure(api_key=GEMINI_API_KEY)
+from google import genai
+import streamlit as st
+
+# Initialize the modern client using Streamlit secrets
+client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
+
+# When generating content later in your app, call it like this:
+# response = client.models.generate_content(
+#     model='gemini-2.5-flash',
+#     contents='your prompt here'
+# )
 
 # Replace this with the actual Test or Production URL from your n8n Webhook node
 N8N_WEBHOOK_URL = "https://ahmadhassaan.app.n8n.cloud/webhook/incoming-data"
