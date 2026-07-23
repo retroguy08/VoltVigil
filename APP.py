@@ -1,21 +1,22 @@
-
-import requests
-import json
-
-
-
-import os
 from google import genai
 import streamlit as st
+import os
 
-# Securely load the API key with fallback
-client = genai.Client(api_key=st.secrets["GOOGLE_API_KEY"])
+# --- 1. CONFIGURATION ---
+st.set_page_config(page_title="VoltVigil | Energy Auditor", page_icon="⚡")
 
+# Safely fetch the API key first
+api_key = st.secrets.get("GOOGLE_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+
+# Now check if it exists
 if not api_key:
     st.error("Gemini API Key not found! Please check your Streamlit Cloud Secrets configuration.")
     st.stop()
 
+# Initialize the modern client
 client = genai.Client(api_key=api_key)
+
+
 
 # When generating content later in your app, call it like this:
 # response = client.models.generate_content(
