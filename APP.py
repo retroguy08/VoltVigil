@@ -53,8 +53,9 @@ if submitted:
         Provide a concise 3-step actionable plan to shift heavy loads to off-peak hours and reduce grid stress.
         """
         
-try:
-            # Use the modern client model call structure
+        
+        try:
+            m# Use the modern client model call structure
             response = client.models.generate_content(
                 model='gemini-2.5-flash',
                 contents=prompt,
@@ -66,7 +67,7 @@ try:
             
         except Exception as e:
             st.error(f"AI Analysis Error: {e}")
-            
+
         # B. Send data to n8n backend for logging and email
         payload = {
             "total_kwh": str(total_kwh),
