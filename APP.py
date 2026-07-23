@@ -53,9 +53,12 @@ if submitted:
         Provide a concise 3-step actionable plan to shift heavy loads to off-peak hours and reduce grid stress.
         """
         
-        try:
-            model = genai.GenerativeModel('gemini-1.5-flash')
-            response = model.generate_content(prompt)
+try:
+            # Use the modern client model call structure
+            response = client.models.generate_content(
+                model='gemini-2.5-flash',
+                contents=prompt,
+            )
             
             st.success("Analysis Complete!")
             st.subheader("💡 Optimization Directives")
@@ -63,7 +66,7 @@ if submitted:
             
         except Exception as e:
             st.error(f"AI Analysis Error: {e}")
-
+            
         # B. Send data to n8n backend for logging and email
         payload = {
             "total_kwh": str(total_kwh),
