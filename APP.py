@@ -1,4 +1,3 @@
-from google import genai
 import streamlit as st
 import os
 import requests
@@ -13,9 +12,6 @@ api_key = st.secrets.get("GOOGLE_API_KEY") or os.environ.get("GOOGLE_API_KEY")
 if not api_key:
     st.error("Google API Key not found in Streamlit Secrets!")
     st.stop()
-
-# Initialize the modern client
-client = genai.Client(api_key=api_key)
 
 N8N_WEBHOOK_URL = "https://ahmadhassaan.app.n8n.cloud/webhook/incoming-data"
 
@@ -44,19 +40,28 @@ if submitted:
         Provide a concise 3-step actionable plan to shift heavy loads to off-peak hours and reduce grid stress.
         """
         
+        # A. Trigger the AI Analysis (Direct REST API Bypass)
         try:
-            # Modern SDK model generation call
-            response = client.models.generate_content(
-                model='gemini-2.5-flash',
-                contents=prompt,
-            )
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+            headers = {'Content-Type': 'application/json'}
+            data = {
+                "contents": [{"parts": [{"text": prompt}]}]
+            }
             
-            st.success("Analysis Complete!")
-            st.subheader("💡 Optimization Directives")
-            st.write(response.text)
+            rest_response = requests.post(url, headers=headers, json=data)
+            
+            if rest_response.status_code == 200:
+                response_json = rest_response.json()
+                ai_text = response_json["candidates"][0]["content"]["parts"][0]["text"]
+                
+                st.success("Analysis Complete!")
+                st.subheader("💡 Optimization Directives")
+                st.write(ai_text)
+            else:
+                st.error(f"API Error: {rest_response.text}")
             
         except Exception as e:
-            st.error(f"AI Analysis Error: {e}")
+            st.error(f"Request Failed: {e}")
 
         # B. Send data to n8n backend for logging and email
         payload = {
