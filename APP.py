@@ -1,30 +1,23 @@
 from google import genai
+import google.generativeai as genai_classic
 import streamlit as st
 import os
+import requests
+import json
 
 # --- 1. CONFIGURATION ---
 st.set_page_config(page_title="VoltVigil | Energy Auditor", page_icon="⚡")
 
-# Safely fetch the API key first
+# Safely load the key from Streamlit secrets
 api_key = st.secrets.get("GOOGLE_API_KEY") or os.environ.get("GOOGLE_API_KEY")
 
-# Now check if it exists
 if not api_key:
-    st.error("Gemini API Key not found! Please check your Streamlit Cloud Secrets configuration.")
+    st.error("API Key not found in Streamlit Secrets!")
     st.stop()
 
-# Initialize the modern client
-client = genai.Client(api_key=api_key)
+# Configure using the classic engine to support AQ. auth keys natively
+genai_classic.configure(api_key=api_key)
 
-
-
-# When generating content later in your app, call it like this:
-# response = client.models.generate_content(
-#     model='gemini-2.5-flash',
-#     contents='your prompt here'
-# )
-
-# Replace this with the actual Test or Production URL from your n8n Webhook node
 N8N_WEBHOOK_URL = "https://ahmadhassaan.app.n8n.cloud/webhook/incoming-data"
 
 # --- 2. FRONTEND UI ---
@@ -43,7 +36,6 @@ if submitted:
     if total_kwh > 0 and appliance_log:
         st.info("Analyzing load profile...")
         
-        # A. Trigger the UI AI Analysis (Gemini)
         prompt = f"""
         You are an expert electrical engineer. Analyze this residential telemetry data:
         - Total Consumption: {total_kwh} kWh
@@ -53,13 +45,10 @@ if submitted:
         Provide a concise 3-step actionable plan to shift heavy loads to off-peak hours and reduce grid stress.
         """
         
-        
         try:
-            # Use the modern client model call structure
-            response = client.models.generate_content(
-                model='gemini-2.5-flash',
-                contents=prompt,
-            )
+            # Using the classic model generator compatible with AQ. auth tokens
+            model = genai_classic.GenerativeModel('gemini-1.5-flash')
+            response = model.generate_content(prompt)
             
             st.success("Analysis Complete!")
             st.subheader("💡 Optimization Directives")
