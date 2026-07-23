@@ -1,5 +1,4 @@
 from google import genai
-import google.generativeai as genai_classic
 import streamlit as st
 import os
 import requests
@@ -8,15 +7,15 @@ import json
 # --- 1. CONFIGURATION ---
 st.set_page_config(page_title="VoltVigil | Energy Auditor", page_icon="⚡")
 
-# Safely load the key from Streamlit secrets
+# Safely fetch the API key from Streamlit secrets
 api_key = st.secrets.get("GOOGLE_API_KEY") or os.environ.get("GOOGLE_API_KEY")
 
 if not api_key:
-    st.error("API Key not found in Streamlit Secrets!")
+    st.error("Google API Key not found in Streamlit Secrets!")
     st.stop()
 
-# Configure using the classic engine to support AQ. auth keys natively
-genai_classic.configure(api_key=api_key)
+# Initialize the modern client
+client = genai.Client(api_key=api_key)
 
 N8N_WEBHOOK_URL = "https://ahmadhassaan.app.n8n.cloud/webhook/incoming-data"
 
@@ -46,9 +45,11 @@ if submitted:
         """
         
         try:
-            # Using the classic model generator compatible with AQ. auth tokens
-            model = genai_classic.GenerativeModel('gemini-1.5-flash')
-            response = model.generate_content(prompt)
+            # Modern SDK model generation call
+            response = client.models.generate_content(
+                model='gemini-2.5-flash',
+                contents=prompt,
+            )
             
             st.success("Analysis Complete!")
             st.subheader("💡 Optimization Directives")
