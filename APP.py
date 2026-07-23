@@ -1,13 +1,17 @@
+from google import genai
 import streamlit as st
 import requests
 import json
 
+
+
+
 # --- 1. CONFIGURATION ---
 st.set_page_config(page_title="VoltVigil | Energy Auditor", page_icon="⚡")
 
-from google import genai
-import streamlit as st
-
+# Initialize the modern client securely with fallback for deployment
+api_key = st.secrets.get("GEMINI_API_KEY")
+client = genai.Client(api_key=api_key)
 # Initialize the modern client using Streamlit secrets
 client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
 
