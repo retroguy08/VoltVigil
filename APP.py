@@ -55,7 +55,7 @@ if submitted:
         
         
         try:
-            m# Use the modern client model call structure
+            # Use the modern client model call structure
             response = client.models.generate_content(
                 model='gemini-2.5-flash',
                 contents=prompt,
