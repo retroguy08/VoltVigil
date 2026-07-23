@@ -12,7 +12,7 @@ GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY", "YOUR_TEMP_GEMINI_KEY_HERE")
 genai.configure(api_key=GEMINI_API_KEY)
 
 # Replace this with the actual Test or Production URL from your n8n Webhook node
-N8N_WEBHOOK_URL = "YOUR_N8N_WEBHOOK_URL_HERE"
+N8N_WEBHOOK_URL = "https://ahmadhassaan.app.n8n.cloud/webhook/incoming-data"
 
 # --- 2. FRONTEND UI ---
 st.title("⚡ VoltVigil: Smart-Home Energy Auditor")
