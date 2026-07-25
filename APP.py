@@ -40,9 +40,10 @@ if submitted:
         Provide a concise 3-step actionable plan to shift heavy loads to off-peak hours and reduce grid stress.
         """
         
-        # A. Trigger the AI Analysis (Direct REST API Bypass)
+        # A. Trigger the AI Analysis (Direct REST API)
         try:
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={api_key}"
+            
             headers = {'Content-Type': 'application/json'}
             data = {
                 "contents": [{"parts": [{"text": prompt}]}]
