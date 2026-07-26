@@ -42,7 +42,7 @@ if submitted:
         
         # A. Trigger the AI Analysis (Direct REST API)
         try:
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-001:generateContent?key={api_key}"
             
             headers = {'Content-Type': 'application/json'}
             data = {
