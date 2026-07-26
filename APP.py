@@ -41,26 +41,25 @@ if submitted:
         """
         
         # A. Trigger the AI Analysis (Direct REST API)
+        # A. Trigger the AI Analysis (Official Google GenAI SDK)
         try:
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-001:generateContent?key={api_key}"
-            
-            headers = {'Content-Type': 'application/json'}
-            data = {
-                "contents": [{"parts": [{"text": prompt}]}]
-            }
-            
-            rest_response = requests.post(url, headers=headers, json=data)
-            
-            if rest_response.status_code == 200:
-                response_json = rest_response.json()
-                ai_text = response_json["candidates"][0]["content"]["parts"][0]["text"]
-                
+            from google import genai
+
+            # Initialize client with key from secrets
+            client = genai.Client(api_key=api_key)
+
+            response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=prompt,
+            )
+
+            if response.text:
                 st.success("Analysis Complete!")
                 st.subheader("💡 Optimization Directives")
-                st.write(ai_text)
+                st.write(response.text)
             else:
-                st.error(f"API Error: {rest_response.text}")
-            
+                st.error("Model did not return a text response.")
+
         except Exception as e:
             st.error(f"Request Failed: {e}")
 
