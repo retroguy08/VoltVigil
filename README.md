@@ -71,7 +71,7 @@ streamlit run APP.py
 ![Streamlit UI](images/Analysis_1.png)
 
 ### 2. Active n8n Automation Engine
-![n8n Workflow Canvas](images/n8n_Backend 1.png)
+![n8n Workflow Canvas](images/n8n_Backend_1.png)
 
 ### 3. Data Logging & Email Delivery Verification
-![Google Sheets & Gmail Proof](images/user_email.png)
+![Google Sheets & Gmail Proof](images/User_email.png.png)
