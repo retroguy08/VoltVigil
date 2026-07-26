@@ -26,22 +26,6 @@ flowchart TD
 
 ---
 
-## 📸 System Screenshots
-
-### 1. Interactive Streamlit Interface & Live AI Analysis
-![Streamlit UI & Directives](images/streamlit_app.png)
-*The Streamlit web application capturing load parameters and displaying real-time Gemini-generated load-shifting directives.*
-
-### 2. Active n8n Automation Engine
-![n8n Workflow Canvas](images/n8n_workflow.png)
-*The end-to-end n8n orchestration workflow processing webhook payloads, running Gemini inference, updating Google Sheets, and triggering email delivery.*
-
-### 3. Data Logging & Email Delivery Verification
-![Google Sheets & Gmail Proof](images/email_proof.png)
-*Successful execution proof: Telemetry logs appended to Google Sheets alongside the delivered audit report inside the inbox.*
-
----
-
 ## 🛠️ Tech Stack & Dependencies
 
 * **Frontend / Dashboard:** [Streamlit](https://streamlit.io/) (Python)
@@ -60,8 +44,8 @@ flowchart TD
 
 ### 1. Clone the Repository
 bash
-[git clone [(https://github.com/retroguy08/VoltVigil).git](https://github.com/retroguy08/VoltVigil.git)
-cd YOUR_REPO_NAME](https://github.com/retroguy08/VoltVigil)
+git clone (https://github.com/retroguy08/VoltVigil.git)
+cd VoltVigil
 
 2. Install Dependencies
 Bash
@@ -80,3 +64,14 @@ WEBHOOK_URL = "your_n8n_webhook_production_url_here"
 Bash
 
 streamlit run APP.py
+
+## 📸 System Screenshots
+
+### 1. Interactive Streamlit Interface & Live AI Analysis
+![Streamlit UI](images/Analysis_1.png)
+
+### 2. Active n8n Automation Engine
+![n8n Workflow Canvas](images/n8n_Backend 1.png)
+
+### 3. Data Logging & Email Delivery Verification
+![Google Sheets & Gmail Proof](images/user_email.png)
