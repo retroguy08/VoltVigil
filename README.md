@@ -1,6 +1,6 @@
 # ⚡ VoltVigil: AI-Powered Residential Energy Auditor & Load-Shifting Pipeline
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black__white.svg)]
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black__white.svg)](https://voltvigil.streamlit.app/#volt-vigil-smart-home-energy-auditor)
 
 > 🚀 **Live Application:** [Click here to launch the VoltVigil App](https://voltvigil.streamlit.app/#volt-vigil-smart-home-energy-auditor))
 
