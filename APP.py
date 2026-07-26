@@ -40,8 +40,9 @@ if submitted:
         Provide a concise 3-step actionable plan to shift heavy loads to off-peak hours and reduce grid stress.
         """
         
-        # A. Trigger the AI Analysis (Direct REST API)
+       
         # A. Trigger the AI Analysis (Official Google GenAI SDK)
+       # A. Trigger the AI Analysis (Official Google GenAI SDK)
         try:
             from google import genai
 
@@ -49,7 +50,7 @@ if submitted:
             client = genai.Client(api_key=api_key)
 
             response = client.models.generate_content(
-                model="gemini-2.5-flash",
+                model="gemini-flash-latest",
                 contents=prompt,
             )
 
@@ -62,7 +63,7 @@ if submitted:
 
         except Exception as e:
             st.error(f"Request Failed: {e}")
-
+            
         # B. Send data to n8n backend for logging and email
         payload = {
             "total_kwh": str(total_kwh),
