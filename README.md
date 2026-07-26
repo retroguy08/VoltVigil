@@ -5,7 +5,7 @@ An end-to-end, intelligent energy management platform that captures telemetry da
 ---
 
 ## 🎯 Architecture Overview
-mermaid
+'''mermaid
 flowchart TD
     A[User Input / Telemetry Data] --> B[Streamlit App]
     B -->|Direct Gemini Call| C[Instant AI Load Directives]
