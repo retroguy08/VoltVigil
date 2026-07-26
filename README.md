@@ -5,34 +5,15 @@ An end-to-end, intelligent energy management platform that captures telemetry da
 ---
 
 ## 🎯 Architecture Overview
-[ User Input / Telemetry Data ]
-│
-▼
-┌──────────────────┐
-│  Streamlit App   │  ◄── (Generates Instant AI Load Directives)
-└─────────┬────────┘
-│
-│  (Webhook Payload)
-▼
-┌──────────────────┐
-│   n8n Workflow   │
-└─────────┬────────┘
-│
-┌───────┴───────┐
-▼               ▼
-┌───────────┐   ┌───────────┐
-│  Gemini   │   │  Google   │
-│ AI Agent  │   │   Sheets  │
-└─────┬─────┘   └─────┬─────┘
-│               │
-└───────┬───────┘
-▼
-┌─────────────────┐
-│  Gmail Audit    │
-│  Notification   │
-└─────────────────┘
-
----
+mermaid
+flowchart TD
+    A[User Input / Telemetry Data] --> B[Streamlit App]
+    B -->|Direct Gemini Call| C[Instant AI Load Directives]
+    B -->|POST Webhook Payload| D[n8n Workflow Engine]
+    D --> E[Gemini AI Analysis]
+    D --> F[Google Sheets Log]
+    E --> G[Gmail Audit Report Notification]
+    F --> G
 
 ## ✨ Key Features
 
