@@ -1,8 +1,10 @@
-# ⚡ AI-Powered Residential Energy Auditor & Load-Shifting Pipeline
+# ⚡ VoltVigil: AI-Powered Residential Energy Auditor & Load-Shifting Pipeline
+
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black__white.svg)]
+
+> 🚀 **Live Application:** [Click here to launch the VoltVigil App](https://voltvigil.streamlit.app/#volt-vigil-smart-home-energy-auditor))
 
 An end-to-end, intelligent energy management platform that captures telemetry data from residential distribution networks, conducts engineering-grade load profile analysis using **Google Gemini**, and triggers an automated orchestration pipeline via **n8n** to update Google Sheets logs and deliver real-time actionable directives straight to an engineer's inbox.
-
----
 
 ## 🎯 Architecture Overview
 ```mermaid
